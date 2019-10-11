@@ -4,7 +4,8 @@ var urlsToCache = [
   './css/style.css',
   './js/xml2json.js',
   './js/ame_master.js',
-  './js/content.js'
+  './js/content.js',
+  './asset/app-icon-192.png'
 ];
 
 self.addEventListener('install', event => {
