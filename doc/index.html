@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Weathercast</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/xml2json.js"></script>
+    <script src="./js/ame_master.js"></script>
+    <script src="./js/content.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div id="today" class="data-container">
+        <div class="title-wrapper">
+          <div class="label-wrapper">
+            <label id="title" class="label"></label>
+            <label id="obs_loc" class="location"></label>
+          </div>
+          <input type="checkbox" id="interval_switch" class="switch"></input>
+        </div>
+        <div id="today_weather" class="weather-data per-3-hour"></div>
+        <div id="today_comment" class="weather-comment"></div>
+      </div>
+      <div id="week" class="data-container">
+        <div id="week_weather" class="weather-data"></div>
+        <div id="week_comment" class="weather-comment"></div>
+      </div>
+      <div class="selector-container">
+        <select id="prefecture" class="selector"></select>
+        <select id="point" class="selector"></select>
+        <label id="fav_star" class="star">★</label>
+      </div>
+    </div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').then(function(registration) {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }).catch(function(err) {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      }
+    </script>
+  </body>
+</html>

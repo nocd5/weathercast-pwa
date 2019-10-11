@@ -1,0 +1,13 @@
+{
+  "short_name": "Weathercast",
+  "name": "Weathercast PWA",
+  "display": "standalone",
+  "start_url": "./index.html",
+  "icons": [
+    {
+      "src": "asset/app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+* {
+  font-family: monospace;
+  font-size: 1em;
+}
+
+.weather-comment {
+  font-size: 1.2em;
+}
+
+.selector-container {
+  display: flex;
+  flex-direction: row;
+  font-size: 1.5em;
+  position: fixed;
+  bottom: 0.5em;
+  right: 0.5em;
+  height: 2.5em;
+}
+
+.selector {
+  margin: 0.1em;
+  border: solid gray 1px;
+  border-radius: 3px;
+  background: transparent;
+}
+
+.selector:hover {
+  border: solid royalblue 1px;
+  box-shadow: 0 0 5px skyblue;
+}
+
+.data-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 1em 0;
+}
+
+.weather-data {
+  display: flex;
+  overflow-x: auto;
+  border-bottom: solid gray 1px;
+}
+
+.weather-data.per-3-hour > *:nth-child(3n),
+.weather-data.per-3-hour > *:nth-child(3n+2) {
+  display: none;
+}
+
+.date-weather {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.weather-icon {
+  width: 12vw;
+  height: auto;
+}
+
+span.saturday {
+  width: 100%;
+  text-align: center;
+  background: lightskyblue;
+}
+
+span.holiday {
+  width: 100%;
+  text-align: center;
+  background: salmon;
+}
+
+span.temperature-max {
+  color: red;
+}
+
+span.temperature-min {
+  color: blue;
+}
+
+label.star {
+  color: gray;
+  font-size: 1.5em;
+  margin: auto;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+
+label.star:hover {
+  text-shadow: 0 0 5px skyblue;
+}
+
+label.star.fav {
+  color: gold;
+  font-size: 1.5em;
+}
+
+.date-date, .wind-value, .wind-direction, .week-date {
+  font-size: 0.8em;
+}
+
+.week-date {
+  padding: 3px 0;
+}
+
+.title-wrapper {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0.5em;
+}
+
+.label-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex:3;
+}
+
+.label {
+  width: 100%;
+  margin: auto;
+}
+
+.location {
+  font-size: 0.8em;
+  width: 100%;
+}
+
+.switch {
+  visibility: hidden;
+  flex:1;
+  content: "";
+  display: flex;
+  height: 2.5em;
+  width: 100%;
+  margin: auto;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0 1em;
+}
+
+.switch:after {
+  visibility: visible;
+  content: "3時間毎";
+  display: flex;
+  align-items: center;
+  border: solid gray 1px;
+  border-radius: 3px;
+  height: 2.5em;
+  margin: auto;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0 1em;
+}
+
+.switch:hover:after {
+  border: solid royalblue 1px;
+  box-shadow: 0 0 5px skyblue;
+}
+
+.switch:checked:after {
+  content: "1時間毎";
+}
