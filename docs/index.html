@@ -6,6 +6,7 @@
     <title>Weathercast</title>
     <link rel="icon" type="image/png" href="./image/app-icon-192.png" sizes="192x192">
     <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="manifest.webmanifest" />
     <link rel="stylesheet" href="./css/style.css">
     <script src="./js/xml2json.js"></script>
     <script src="./js/ame_master.js"></script>
@@ -42,6 +43,10 @@
           console.log('ServiceWorker registration failed: ', err);
         });
       }
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/pwacompat@2.0.9/pwacompat.min.js"
+                  integrity="sha384-VcI6S+HIsE80FVM1jgbd6WDFhzKYA0PecD/LcIyMQpT4fMJdijBh0I7Iblaacawc"
+                  crossorigin="anonymous">
     </script>
   </body>
 </html>

@@ -7,7 +7,8 @@ var urlsToCache = [
   './js/content.js',
   './image/app-icon-512.png',
   './image/app-icon-384.png',
-  './image/app-icon-192.png'
+  './image/app-icon-192.png',
+  'https://cdn.jsdelivr.net/npm/pwacompat@2.0.9/pwacompat.min.js'
 ];
 
 self.addEventListener('install', event => {
