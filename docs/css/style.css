@@ -98,15 +98,15 @@ label.star.fav {
   font-size: 0.8em;
 }
 
-.precipitation {
+.precipitation, .wind {
   font-size: 0.9em;
 }
 
-.precipitation-unit {
+.precipitation-unit, .wind-unit {
   font-size: 0.6em;
 }
 
-.wind-value, .wind-direction {
+.wind-direction {
   font-size: 0.8em;
 }
 

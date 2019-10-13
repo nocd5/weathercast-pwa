@@ -173,9 +173,15 @@ function drawData(json) {
     precipitation.appendChild(pv);
     precipitation.appendChild(pu);
 
-    var wind_value = document.createElement('span');
-    wind_value.innerHTML = json.weathernews.data.day.wind.hour[i].value + json.weathernews.data.day.wind._unit;
-    wind_value.classList.add('wind-value');
+    var wind = document.createElement('span');
+    wind.classList.add('wind-value');
+    var wv = document.createElement('span');
+    var wu = document.createElement('span');
+    wu.classList.add('wind-unit');
+    wv.innerHTML = json.weathernews.data.day.wind.hour[i].value;
+    wu.innerHTML = json.weathernews.data.day.wind._unit;
+    wind.appendChild(wv);
+    wind.appendChild(wu);
     var wind_direction = document.createElement('span');
     wind_direction.classList.add('wind-direction');
     wind_direction.innerHTML = [
@@ -190,7 +196,7 @@ function drawData(json) {
     elem.appendChild(img);
     elem.appendChild(tmp);
     elem.appendChild(precipitation);
-    elem.appendChild(wind_value);
+    elem.appendChild(wind);
     elem.appendChild(wind_direction);
     today_weather.appendChild(elem);
   });
