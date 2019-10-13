@@ -174,7 +174,7 @@ function drawData(json) {
     precipitation.appendChild(pu);
 
     var wind = document.createElement('span');
-    wind.classList.add('wind-value');
+    wind.classList.add('wind');
     var wv = document.createElement('span');
     var wu = document.createElement('span');
     wu.classList.add('wind-unit');
