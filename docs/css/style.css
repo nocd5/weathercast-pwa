@@ -94,7 +94,19 @@ label.star.fav {
   font-size: 1.5em;
 }
 
-.date-date, .wind-value, .wind-direction, .week-date {
+.date-date, .week-date {
+  font-size: 0.8em;
+}
+
+.precipitation {
+  font-size: 0.9em;
+}
+
+.precipitation-unit {
+  font-size: 0.6em;
+}
+
+.wind-value, .wind-direction {
   font-size: 0.8em;
 }
 
@@ -112,7 +124,7 @@ label.star.fav {
   display: flex;
   flex-direction: column;
   width: 100%;
-  flex:3;
+  flex: 3;
 }
 
 .label {
@@ -127,15 +139,12 @@ label.star.fav {
 
 .switch {
   visibility: hidden;
-  flex:1;
+  flex: 1;
   content: "";
   display: flex;
   height: 2.5em;
-  width: 100%;
-  margin: auto;
-  margin-right: 0.5em;
+  margin-left: auto;
   margin-bottom: 0.5em;
-  padding: 0 1em;
 }
 
 .switch:after {
@@ -143,13 +152,11 @@ label.star.fav {
   content: "3時間毎";
   display: flex;
   align-items: center;
+  justify-content: center;
   border: solid gray 1px;
   border-radius: 3px;
   height: 2.5em;
-  margin: auto;
-  margin-right: 0.5em;
-  margin-bottom: 0.5em;
-  padding: 0 1em;
+  width: 100%;
 }
 
 .switch:hover:after {

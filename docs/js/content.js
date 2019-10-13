@@ -164,7 +164,14 @@ function drawData(json) {
     tmp.innerHTML = json.weathernews.data.day.temperature.hour[i] + json.weathernews.data.day.temperature._unit;
 
     var precipitation = document.createElement('span');
-    precipitation.innerHTML = json.weathernews.data.day.precipitation.hour[i] + json.weathernews.data.day.precipitation._unit;
+    precipitation.classList.add('precipitation');
+    var pv = document.createElement('span');
+    var pu = document.createElement('span');
+    pu.classList.add('precipitation-unit');
+    pv.innerHTML = json.weathernews.data.day.precipitation.hour[i];
+    pu.innerHTML = json.weathernews.data.day.precipitation._unit;
+    precipitation.appendChild(pv);
+    precipitation.appendChild(pu);
 
     var wind_value = document.createElement('span');
     wind_value.innerHTML = json.weathernews.data.day.wind.hour[i].value + json.weathernews.data.day.wind._unit;
