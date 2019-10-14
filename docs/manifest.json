@@ -1,8 +1,10 @@
 {
-  "short_name": "Weathercast",
   "name": "Weathercast PWA",
-  "display": "standalone",
+  "short_name": "Weathercast",
   "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#fcac32",
+  "background_color": "#519ec4",
   "icons": [
     {
       "src": "image/app-icon-512.png",
