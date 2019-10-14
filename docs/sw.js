@@ -1,4 +1,4 @@
-var VERSION = "v20191013-2";
+var VERSION = "v20191014-1";
 
 var CACHE_NAME = 'weathercast-pwa';
 var urlsToCache = [
