@@ -3,7 +3,7 @@
   "short_name": "Weathercast",
   "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "#fff",
+  "theme_color": "#1976d2",
   "icons": [
     {
       "src": "image/app-icon-512.png",
