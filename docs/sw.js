@@ -1,30 +1,36 @@
-var VERSION = "v20191014";
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js');
 
 var CACHE_NAME = 'weathercast-pwa';
-var urlsToCache = [
-  './index.html',
-  './css/style.css',
-  './js/xml2json.js',
-  './js/ame_master.js',
-  './js/content.js',
-  './image/app-icon-512.png',
-  './image/app-icon-384.png',
-  './image/app-icon-192.png',
-  'https://cdn.jsdelivr.net/npm/pwacompat@2.0.9/pwacompat.min.js'
-];
 
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches
-    .open(CACHE_NAME)
-    .then(cache => cache.addAll(urlsToCache))
-  );
-});
+workbox.routing.registerRoute(
+  /.+(?:\/lib\/.+\.js|\.png)$/,
+  new workbox.strategies.CacheFirst({
+    cacheName: CACHE_NAME,
+  })
+);
 
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches
-    .match(event.request)
-    .then(response => response ? response : fetch(event.request))
-  );
-});
+workbox.routing.registerRoute(
+  /.+\/ame_master\.js$/,
+  new workbox.strategies.CacheFirst({
+    cacheName: CACHE_NAME,
+    plugins: [
+      new workbox.expiration.Plugin({
+        maxAgeSeconds: 24 * 60 * 60,
+      }),
+    ],
+  })
+);
+
+workbox.routing.registerRoute(
+  /.+(?:\/|\.html|\/js\/.+\.js|\/css\/.+\.css)$/,
+  new workbox.strategies.StaleWhileRevalidate({
+    cacheName: CACHE_NAME,
+  })
+);
+
+workbox.routing.registerRoute(
+  /.+\.xml$/,
+  new workbox.strategies.NetworkFirst({
+    cacheName: CACHE_NAME,
+  })
+);
