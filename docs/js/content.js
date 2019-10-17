@@ -158,7 +158,8 @@ function drawData(json) {
 
     var img = document.createElement('img');
     img.classList.add('weather-icon');
-    img.setAttribute('src','https://mwsgvs.weathernews.jp/s/img/telop/'+e+'.png');
+    fetch('https://mwsgvs.weathernews.jp/s/img/telop/'+e+'.png')
+      .then(resp => img.setAttribute('src', resp.url))
 
     var tmp = document.createElement('span');
     tmp.innerHTML = json.weathernews.data.day.temperature.hour[i] + json.weathernews.data.day.temperature._unit;
@@ -225,7 +226,8 @@ function drawData(json) {
 
     var img = document.createElement('img');
     img.classList.add('weather-icon');
-    img.setAttribute('src','https://mwsgvs.weathernews.jp/s/img/telop/'+e+'.png');
+    fetch('https://mwsgvs.weathernews.jp/s/img/telop/'+e+'.png')
+      .then(resp => img.setAttribute('src', resp.url))
 
     var max = document.createElement('span');
     max.classList.add('temperature-max');
@@ -254,12 +256,9 @@ function getWeather(id) {
   if (id != '') {
     return fetch('https://weathernews.jp/pinpoint/xml/'+id+'.xml')
       .then(resp => resp.text())
-      .then(xml => {
-        var x2js = new X2JS();
-        return x2js.xml_str2json(xml);
-      });
+      .then(xml => (new X2JS()).xml_str2json(xml));
   }
   else {
-    return new Promise((e)=>[]);
+    return new Promise(e => {});
   }
 }
