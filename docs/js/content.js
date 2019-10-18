@@ -101,7 +101,8 @@ function point_onchange() {
   title.innerHTML = point.selectedOptions[0].text +'の天気';
   obs_loc.innerHTML = '(' + ame_master.filter(e => e['観測所番号'] == id)[0]['所在地'] + ')'
   getWeather(point.selectedOptions[0].value)
-    .then(json => drawData(json));
+    .catch(err => drawData(null))
+    .then(json => drawData(json))
 
   if (StatusDict['favorite'] == null) return;
   if (StatusDict['favorite'].filter(e => e['観測所番号'] === id).length > 0) {
@@ -134,11 +135,22 @@ function fav_star_onclick() {
 }
 
 function drawData(json) {
+  var today_weather = document.getElementById('today_weather');
+  var today_comment = document.getElementById('today_comment');
+  var week_weather = document.getElementById('week_weather');
+  var week_comment = document.getElementById('week_comment');
+
+  if (!json) {
+    today_weather.innerHTML = '読み込みに失敗しました';
+    today_comment.innerHTML = '';
+    week_weather.innerHTML = '読み込みに失敗しました';
+    week_comment.innerHTML = '';
+    return;
+  }
+
   var startHour = Number(json.weathernews.data.day._startHour);
 
   // Today
-  var today_weather = document.getElementById('today_weather');
-  var today_comment = document.getElementById('today_comment');
   today_weather.innerHTML = '';
   json.weathernews.data.day.weather.hour.forEach((e, i) => {
     var elem = document.createElement('span');
@@ -207,8 +219,6 @@ function drawData(json) {
     .then(comment => today_comment.innerHTML = comment);
 
   // Week
-  var week_weather = document.getElementById('week_weather');
-  var week_comment = document.getElementById('week_comment');
   week_weather.innerHTML = '';
   json.weathernews.data.week.weather.day.forEach((e, i) => {
     var elem = document.createElement('span');
@@ -259,6 +269,6 @@ function getWeather(id) {
       .then(xml => (new X2JS()).xml_str2json(xml));
   }
   else {
-    return new Promise(e => {});
+    return new Promise(e => null);
   }
 }
