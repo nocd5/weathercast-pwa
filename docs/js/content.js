@@ -1,11 +1,11 @@
-var StatusDict = {};
+let StatusDict = {};
 
-var prefecture;
-var point;
-var fav_star;
-var title;
-var obs_loc;
-var interval_switch;
+let prefecture;
+let point;
+let fav_star;
+let title;
+let obs_loc;
+let interval_switch;
 
 document.addEventListener('DOMContentLoaded', () => {
   prefecture = document.getElementById('prefecture');
@@ -15,11 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
   obs_loc = document.getElementById('obs_loc');
   interval_switch = document.getElementById('interval_switch');
 
-  var pref = ['お気に入り']
+  let pref = ['お気に入り']
   ame_master.forEach(e => pref.push(e['都府県振興局']));
   pref = pref.filter((x, i, self) => self.indexOf(x) === i);
   pref.forEach(e => {
-    var o = document.createElement('option');
+    let o = document.createElement('option');
     o.innerHTML = e;
     prefecture.appendChild(o);
   });
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   point.addEventListener('change', point_onchange);
   fav_star.addEventListener('click', fav_star_onclick);
   interval_switch.addEventListener('change', ()  => {
-    var today_weather = document.querySelector('#today #today_weather');
+    let today_weather = document.querySelector('#today #today_weather');
     if (interval_switch.checked) {
       if (today_weather.classList.contains('per-3-hour')) {
         today_weather.classList.toggle('per-3-hour');
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  var j = localStorage.getItem('StatusDict');
+  let j = localStorage.getItem('StatusDict');
   if (j !== null) {
     StatusDict = JSON.parse(j);
     prefecture.selectedIndex = StatusDict['prefecture'];
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     point.selectedIndex = StatusDict['point'];
   }
   else {
-    var p = 0;
+    let p = 0;
     prefecture.childNodes.forEach((e, i) => {
       if (e.text == '東京') p = i;
     });
@@ -65,22 +65,22 @@ function prefecture_onchange() {
   StatusDict['prefecture'] = prefecture.selectedIndex;
   localStorage.setItem('StatusDict', JSON.stringify(StatusDict));
 
-  var pref = prefecture.selectedOptions[0].text;
+  let pref = prefecture.selectedOptions[0].text;
 
-  var l = [];
+  let l = [];
   if (pref == 'お気に入り') {
     l = StatusDict['favorite'] || [];
   }
   else {
-    var l = ame_master.filter(e => e['都府県振興局'] == pref);
+    l = ame_master.filter(e => e['都府県振興局'] == pref);
   }
 
   point.innerHTML = '';
-  var p = document.createElement('option');
+  let p = document.createElement('option');
   p.innerHTML = '';
   point.appendChild(p);
   l.forEach(e => {
-    var p = document.createElement('option');
+    p = document.createElement('option');
     p.setAttribute('value', e['観測所番号']);
     p.innerHTML = e['観測所名'];
     point.appendChild(p);
@@ -96,7 +96,7 @@ function point_onchange() {
   localStorage.setItem('StatusDict', JSON.stringify(StatusDict));
 
   if (point.selectedOptions[0] == null) return;
-  var id = point.selectedOptions[0].value;
+  let id = point.selectedOptions[0].value;
   if (id == '') return;
   title.innerHTML = point.selectedOptions[0].text +'の天気';
   obs_loc.innerHTML = '(' + ame_master.filter(e => e['観測所番号'] == id)[0]['所在地'] + ')'
@@ -135,10 +135,10 @@ function fav_star_onclick() {
 }
 
 function drawData(json) {
-  var today_weather = document.getElementById('today_weather');
-  var today_comment = document.getElementById('today_comment');
-  var week_weather = document.getElementById('week_weather');
-  var week_comment = document.getElementById('week_comment');
+  let today_weather = document.getElementById('today_weather');
+  let today_comment = document.getElementById('today_comment');
+  let week_weather = document.getElementById('week_weather');
+  let week_comment = document.getElementById('week_comment');
 
   if (!json) {
     today_weather.innerHTML = '読み込みに失敗しました';
@@ -148,16 +148,16 @@ function drawData(json) {
     return;
   }
 
-  var startHour = Number(json.weathernews.data.day._startHour);
+  let startHour = Number(json.weathernews.data.day._startHour);
 
   // Today
   today_weather.innerHTML = '';
   json.weathernews.data.day.weather.hour.forEach((e, i) => {
-    var elem = document.createElement('span');
+    let elem = document.createElement('span');
     elem.classList.add('date-weather');
 
-    var date = document.createElement('span');
-    var dt = new Date(
+    let date = document.createElement('span');
+    let dt = new Date(
       Number(json.weathernews.data.day._startYear),
       Number(json.weathernews.data.day._startMonth) - 1,
       Number(json.weathernews.data.day._startDate) + Math.floor((i+startHour) / 24)
@@ -165,37 +165,37 @@ function drawData(json) {
     date.innerHTML = dt.getDate() + '日';
     date.classList.add('date-date');
 
-    var time = document.createElement('span');
+    let time = document.createElement('span');
     time.innerHTML = (i+startHour) % 24 + '時';
 
-    var img = document.createElement('img');
+    let img = document.createElement('img');
     img.classList.add('weather-icon');
     fetch('https://mwsgvs.weathernews.jp/s/img/telop/'+e+'.png')
       .then(resp => img.setAttribute('src', resp.url))
 
-    var tmp = document.createElement('span');
+    let tmp = document.createElement('span');
     tmp.innerHTML = json.weathernews.data.day.temperature.hour[i] + json.weathernews.data.day.temperature._unit;
 
-    var precipitation = document.createElement('span');
+    let precipitation = document.createElement('span');
     precipitation.classList.add('precipitation');
-    var pv = document.createElement('span');
-    var pu = document.createElement('span');
+    let pv = document.createElement('span');
+    let pu = document.createElement('span');
     pu.classList.add('precipitation-unit');
     pv.innerHTML = json.weathernews.data.day.precipitation.hour[i];
     pu.innerHTML = json.weathernews.data.day.precipitation._unit;
     precipitation.appendChild(pv);
     precipitation.appendChild(pu);
 
-    var wind = document.createElement('span');
+    let wind = document.createElement('span');
     wind.classList.add('wind');
-    var wv = document.createElement('span');
-    var wu = document.createElement('span');
+    let wv = document.createElement('span');
+    let wu = document.createElement('span');
     wu.classList.add('wind-unit');
     wv.innerHTML = json.weathernews.data.day.wind.hour[i].value;
     wu.innerHTML = json.weathernews.data.day.wind._unit;
     wind.appendChild(wv);
     wind.appendChild(wu);
-    var wind_direction = document.createElement('span');
+    let wind_direction = document.createElement('span');
     wind_direction.classList.add('wind-direction');
     wind_direction.innerHTML = [
       '北北東', '北東', '東北東', '東',
@@ -221,10 +221,10 @@ function drawData(json) {
   // Week
   week_weather.innerHTML = '';
   json.weathernews.data.week.weather.day.forEach((e, i) => {
-    var elem = document.createElement('span');
+    let elem = document.createElement('span');
     elem.classList.add('date-weather');
 
-    var date = document.createElement('span');
+    let date = document.createElement('span');
     date.innerHTML = 
           json.weathernews.date.week.day[i].date +
           '(' + '日月火水木金土'[json.weathernews.date.week.day[i].day] + ')';
@@ -234,20 +234,20 @@ function drawData(json) {
     if (json.weathernews.date.week.day[i].day == 6)
       date.classList.add('saturday');
 
-    var img = document.createElement('img');
+    let img = document.createElement('img');
     img.classList.add('weather-icon');
     fetch('https://mwsgvs.weathernews.jp/s/img/telop/'+e+'.png')
       .then(resp => img.setAttribute('src', resp.url))
 
-    var max = document.createElement('span');
+    let max = document.createElement('span');
     max.classList.add('temperature-max');
     max.innerHTML = json.weathernews.data.week.temperature.day[i].max + json.weathernews.data.week.temperature._unit;
 
-    var min = document.createElement('span');
+    let min = document.createElement('span');
     min.classList.add('temperature-min');
     min.innerHTML = json.weathernews.data.week.temperature.day[i].min + json.weathernews.data.week.temperature._unit;
 
-    var chance_of_rain = document.createElement('span');
+    let chance_of_rain = document.createElement('span');
     chance_of_rain.innerHTML = json.weathernews.data.week.chance_of_rain.day[i] + json.weathernews.data.week.chance_of_rain._unit;
 
     elem.appendChild(date);
