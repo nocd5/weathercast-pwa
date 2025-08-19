@@ -107,7 +107,8 @@ label.star.fav {
 }
 
 .wind-direction {
-  font-size: 0.8em;
+  margin: 5px 0 10px 0;
+  width: 1.2em;
 }
 
 .week-date {
@@ -167,3 +168,4 @@ label.star.fav {
 .switch:checked:after {
   content: "1時間毎";
 }
+
