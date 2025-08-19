@@ -169,7 +169,7 @@ function drawData(json) {
     time.innerHTML = (i+startHour) % 24 + '時';
 
     let weather_icon = document.createElement('img');
-    weather_icon.classList.add('weather-weather_icon');
+    weather_icon.classList.add('weather-icon');
     fetch('https://mwsgvs.weathernews.jp/s/img/telop/'+e+'.png')
       .then(resp => weather_icon.setAttribute('src', resp.url))
 
@@ -270,3 +270,4 @@ function getWeather(id) {
     return new Promise(e => null);
   }
 }
+
