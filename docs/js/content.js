@@ -233,7 +233,7 @@ function drawData(json) {
       date.classList.add('saturday');
 
     let img = document.createElement('img');
-    img.classList.add('weather-weather_icon');
+    img.classList.add('weather-icon');
     fetch('https://mwsgvs.weathernews.jp/s/img/telop/'+e+'.png')
       .then(resp => img.setAttribute('src', resp.url))
 
@@ -270,4 +270,5 @@ function getWeather(id) {
     return new Promise(e => null);
   }
 }
+
 
