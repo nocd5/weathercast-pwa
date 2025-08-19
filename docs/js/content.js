@@ -168,10 +168,10 @@ function drawData(json) {
     let time = document.createElement('span');
     time.innerHTML = (i+startHour) % 24 + '時';
 
-    let img = document.createElement('img');
-    img.classList.add('weather-icon');
+    let weather_icon = document.createElement('img');
+    weather_icon.classList.add('weather-weather_icon');
     fetch('https://mwsgvs.weathernews.jp/s/img/telop/'+e+'.png')
-      .then(resp => img.setAttribute('src', resp.url))
+      .then(resp => weather_icon.setAttribute('src', resp.url))
 
     let tmp = document.createElement('span');
     tmp.innerHTML = json.weathernews.data.day.temperature.hour[i] + json.weathernews.data.day.temperature._unit;
@@ -195,18 +195,16 @@ function drawData(json) {
     wu.innerHTML = json.weathernews.data.day.wind._unit;
     wind.appendChild(wv);
     wind.appendChild(wu);
-    let wind_direction = document.createElement('span');
+
+    let wind_direction = document.createElement('img');
     wind_direction.classList.add('wind-direction');
-    wind_direction.innerHTML = [
-      '北北東', '北東', '東北東', '東',
-      '東南東', '南東', '南南東', '南',
-      '南南西', '南西', '西南西', '西',
-      '西北西', '北西', '北北西', '北',
-    ][json.weathernews.data.day.wind.hour[i].direction - 1];
+    let wd = json.weathernews.data.day.wind.hour[i].direction.padStart(2, "0");
+    fetch('https://gvs.weathernews.jp/onebox/img/wind/png/wind_1_'+wd+'.png')
+      .then(resp => wind_direction.setAttribute('src', resp.url))
 
     elem.appendChild(date);
     elem.appendChild(time);
-    elem.appendChild(img);
+    elem.appendChild(weather_icon);
     elem.appendChild(tmp);
     elem.appendChild(precipitation);
     elem.appendChild(wind);
@@ -235,7 +233,7 @@ function drawData(json) {
       date.classList.add('saturday');
 
     let img = document.createElement('img');
-    img.classList.add('weather-icon');
+    img.classList.add('weather-weather_icon');
     fetch('https://mwsgvs.weathernews.jp/s/img/telop/'+e+'.png')
       .then(resp => img.setAttribute('src', resp.url))
 
